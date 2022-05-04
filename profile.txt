@@ -1,0 +1,41 @@
+Access data YES YES NO NULL RCOM2 5 5000
+Netview logon CC31157 OSBSV DARRELL E
+Initial command RSBDIC DARRELL MAVERICK
+Dialout number 9
+*
+Reasoning ON
+*
+Pager 4740001 EZPAGE TEST4
+Pager 4740002 EZPAGE NONE
+Pager 4740003 EZPAGE NONE
+Pager 4740004 EZPAGE NONE
+Pager 4740005 EZPAGE NONE
+Pager 9660001 EZPAGE TEST9
+Pager 9660002 EZPAGE NONE
+Pager 9660003 EZPAGE NONE
+Pager BERNIE  LAN    ERROR
+*
+4740001 oncall Monday   07:30 Thursday 15:30
+4740002 oncall Monday   07:30 Thursday 15:30
+4740003 oncall Monday   07:30 Thursday 15:30
+4740004 oncall Monday   15:30 Thursday 23:30
+4740005 oncall Monday   15:30 Thursday 23:30
+9660001 oncall Monday   07:30 Thursday 15:30
+9660002 oncall Monday   07:30 Thursday 15:30
+9660003 oncall Monday   07:30 Thursday 15:30
+*
+4740004 messages are held when unavailable
+4740005 messages are ignored when unavailable
+*
+4740002 backs up   4740001 after 2 pages
+4740003 supervises 4740001 after 00:05
+9660002 backs up   9660001 after 2 pages
+9660003 supervises 9660001 after 00:05
+*
+4740001 is carried by VM Operations
+4740002 is carried by VM Technical Support
+4740003 is carried by VM Management
+9660001 is carried by MVS Operations
+9660002 is carried by MVS Technical Support
+9660003 is carried by MVS Management
+BERNIE  is carried by Bernie Michalik

@@ -1,0 +1,39 @@
+                                                                                
+append([],LIST,LIST).                                                           
+append(LIST,[],LIST).                                                           
+append([HEAD1!TAIL1],LIST2,[HEAD1!TAIL3]) <-                                    
+        append(TAIL1,LIST2,TAIL3).                                              
+member(ITEM,[ITEM!TAIL]).                                                       
+member(ITEM,[HEAD!TAIL]) <- member(ITEM,TAIL).                                  
+                                                                                
+support_word((A . B), (A . B)).                                                 
+day_word(("Sunday" . S), S, "Sunday").                                          
+day_word(("Monday" . S), S, "Monday").                                          
+day_word(("Tuesday" . S), S, "Tuesday").                                        
+day_word(("Wednesday" . S), S, "Wednesday").                                    
+day_word(("Thursday" . S), S, "Thursday").                                      
+day_word(("Friday" . S), S, "Friday").                                          
+day_word(("Saturday" . S), S, "Saturday").                                      
+                                                                                
+time_word((Hh . ":" . Mm . S), S, ? Hh * 3600 + Mm * 60).                       
+                                                                                
+set_availability(S0) <-                                                         
+     support_word(S0,(Support . S1)) &                                          
+     establish_availability(S1, Available_list) &                               
+     term_assert(is_available, Support, Available_list).                        
+                                                                                
+establish_availability(nil,nil).                                                
+                                                                                
+establish_availability(S0, Available_list) <-                                   
+     day_word(S0, S1, Day) &                                                    
+     time_word(S1, S2, StartTime) &                                             
+     time_word(S2, S3, EndTime) &                                               
+     establish_availability(S3, Tail_of_available_list) &                       
+     append((Day . StartTime . EndTime), Tail_of_available_list,                
+            Available_list).                                                    
+                                                                                
+when_available(Support, Day, Time) <-                                           
+     term_get(is_available, Support, Available_list) &                          
+     is_member((Day . StartTime . EndTime), Available_list, *) &                
+     ge(Time, StartTime) &                                                      
+     le(Time, EndTime).                                                         
